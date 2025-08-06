@@ -1,0 +1,50 @@
+[
+  {
+    "url": "https://hargapasar.karawangkab.go.id",
+    "type": "iframe",
+    "col": 1,
+    "row": 1,
+    "colSpan": 1,
+    "rowSpan": 3
+  },
+  {
+    "url": "http://localhost:3000/proxy?url=https://bedmonitoring.karawangkab.go.id",
+    "type": "iframe",
+    "col": 2,
+    "row": 1,
+    "colSpan": 1,
+    "rowSpan": 3
+  },
+  {
+    "url": "http://localhost:3000/proxy?url=https://infoloker.karawangkab.go.id/",
+    "type": "iframe",
+    "col": 5,
+    "row": 1,
+    "colSpan": 1,
+    "rowSpan": 3
+  },
+  {
+    "url": "http://localhost:3000/proxy?url=https://tangkar.karawangkab.go.id",
+    "type": "iframe",
+    "col": 6,
+    "row": 1,
+    "colSpan": 1,
+    "rowSpan": 3
+  },
+  {
+    "url": "http://localhost:3000/proxy?url=https://karawangkab.go.id",
+    "type": "iframe",
+    "col": 3,
+    "row": 2,
+    "colSpan": 2,
+    "rowSpan": 2
+  },
+  {
+    "url": "main.jpeg",
+    "type": "image",
+    "col": 3,
+    "row": 1,
+    "colSpan": 2,
+    "rowSpan": 1
+  }
+]
