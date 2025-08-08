@@ -17,8 +17,10 @@
       grid-template-columns: repeat(6, 1fr); /* max 6 kolom */
       grid-template-rows: repeat(3, 1fr);    /* max 3 baris */
       /* grid-template-rows: 50% 25% 25%;  👈 split visually based on your layout intent */
-      height: 100vh;
-      width: 100vw;
+      /* height: 100vh;
+      width: 100vw; */
+      width: 5760px;
+      height: 6480px;
       gap: 2px;
     }
 
@@ -37,6 +39,10 @@
     .iframe-wrapper {
         border: 1px dashed rgba(0,0,0,0.3);
         /* background: rgba(0,0,0,0.03); */
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border: none;
     }
   </style>
 </head>
