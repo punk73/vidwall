@@ -80,7 +80,7 @@
     grid.style.gridTemplateColumns = colSizes.join(' ');
     grid.style.gridTemplateRows = rowSizes.join(' ');
 
-    layoutData.forEach((item, index) => {
+    layoutData.forEach((item) => {
       const wrapper = document.createElement('div');
       wrapper.classList.add('iframe-wrapper');
       wrapper.style.gridColumn = `${item.col} / span ${item.colSpan}`;
@@ -96,7 +96,6 @@
         wrapper.appendChild(iframe);
       }
 
-      // Only add resizers if it's the edge of a column or row
       if (item.col + item.colSpan - 1 < 6) {
         const resizerCol = document.createElement('div');
         resizerCol.classList.add('resizer-col');
@@ -123,20 +122,22 @@
       const colIndex = parseInt(handle.dataset.col);
       const startX = e.clientX;
       const colSizes = JSON.parse(localStorage.getItem('colSizes')) || Array(6).fill('1fr');
-      const gridWidth = grid.offsetWidth;
-      const currentSize = grid.getBoundingClientRect().width * parseFloat(getComputedStyle(grid).gridTemplateColumns.split(' ')[colIndex - 1].replace('fr','')) / gridWidth;
+      const colWidths = getComputedStyle(grid).gridTemplateColumns.split(' ').map(c => c.trim());
+
+      let startSize = parseInt(colWidths[colIndex - 1]) || grid.offsetWidth / 6;
 
       const onMouseMove = (e) => {
         const delta = e.clientX - startX;
-        const px = Math.max(50, currentSize + delta);
-        colSizes[colIndex - 1] = px + 'px';
+        const newSize = Math.max(50, startSize + delta);
+        colSizes[colIndex - 1] = `${newSize}px`;
         localStorage.setItem('colSizes', JSON.stringify(colSizes));
-        renderGrid();
+        grid.style.gridTemplateColumns = colSizes.join(' ');
       };
 
       const onMouseUp = () => {
         document.removeEventListener('mousemove', onMouseMove);
         document.removeEventListener('mouseup', onMouseUp);
+        renderGrid(); // re-render after resizing
       };
 
       document.addEventListener('mousemove', onMouseMove);
@@ -150,20 +151,22 @@
       const rowIndex = parseInt(handle.dataset.row);
       const startY = e.clientY;
       const rowSizes = JSON.parse(localStorage.getItem('rowSizes')) || Array(3).fill('1fr');
-      const gridHeight = grid.offsetHeight;
-      const currentSize = grid.getBoundingClientRect().height * parseFloat(getComputedStyle(grid).gridTemplateRows.split(' ')[rowIndex - 1].replace('fr','')) / gridHeight;
+      const rowHeights = getComputedStyle(grid).gridTemplateRows.split(' ').map(r => r.trim());
+
+      let startSize = parseInt(rowHeights[rowIndex - 1]) || grid.offsetHeight / 3;
 
       const onMouseMove = (e) => {
         const delta = e.clientY - startY;
-        const px = Math.max(50, currentSize + delta);
-        rowSizes[rowIndex - 1] = px + 'px';
+        const newSize = Math.max(50, startSize + delta);
+        rowSizes[rowIndex - 1] = `${newSize}px`;
         localStorage.setItem('rowSizes', JSON.stringify(rowSizes));
-        renderGrid();
+        grid.style.gridTemplateRows = rowSizes.join(' ');
       };
 
       const onMouseUp = () => {
         document.removeEventListener('mousemove', onMouseMove);
         document.removeEventListener('mouseup', onMouseUp);
+        renderGrid(); // re-render after resizing
       };
 
       document.addEventListener('mousemove', onMouseMove);
